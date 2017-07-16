@@ -1,5 +1,9 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div.container
+    img.photo.animate.fade.in
+    img.photo.animate.fade
+    img.preload
+  h2.title ...
+  audio.player(src='http://lcs.com/%E7%A8%BB%E9%A6%99.mp3',autoplay=true,controls=true,loop=true)
