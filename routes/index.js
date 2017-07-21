@@ -8,10 +8,17 @@ router.get('/', function(req, res, next) {
   res.render('index', { title:"2017-07-16",music:req.query.music });
 });
 
-router.all('/album/:album',function( req , res , next ){
+router.post('/album/:album',function( req , res , next ){
   album(req.params.album).then( data=>{
     res.json(data);
   });
+});
+
+router.get('/album/:album/:music',function( req , res , next ){
+	if(!/http|\/\//.test(req.params.music)){
+  		req.params.music = `/${req.params.music}`
+  	}
+  	res.render('index', { title:"2017-07-16",album:req.params.album,music:req.params.music });
 });
 
 module.exports = router;

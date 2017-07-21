@@ -5,9 +5,9 @@
 
 (function(){
     'use strict';
-    const album = 'B0Z5qXGF1iS2iW';
+    const album = window.album || 'B0Z5qXGF1iS2iW';
 
-    fetch(`/album/${album}`).then(req=>req.json()).then(data=>{
+    fetch(`/album/${album}`,{method:'POST'}).then(req=>req.json()).then(data=>{
         const host = (function(locations){
             for( let host in locations ){
                 return `${locations[host].scheme}://${locations[host].hosts[0]}`
