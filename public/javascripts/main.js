@@ -13,7 +13,7 @@
                 return `${locations[host].scheme}://${locations[host].hosts[0]}`
             }
         })(data.webasseturls.locations);
-        
+
         showTitle(data.webstream.photos.map(photo=>photo.dateCreated.match(/\d{4}-\d\d-\d\d/)[0]).sort())
         return {
             host:host,
@@ -25,14 +25,14 @@
         carousel(data.photos.map( item=>`${data.host}${item.url_path}` ));
         data.dateCreated
     });
-    
+
     const showTitle = function(dateList){
         let $title = $('.title').html( `${dateList[0]}_${dateList[dateList.length-1]}`);
         setTimeout(function() {
             $title.fadeOut();
-        }, 3000);
+        }, 5000);
     };
-    
+
     const carousel = function( photos ){
         //photos = photos.filter((a,i)=>i<3);
         let index = 0;

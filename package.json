@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "babel": "node ./node_modules/.bin/babel  -s  -o public/javascripts/main.min.js  --compact --minified  public/javascripts/main.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -14,5 +15,9 @@
     "morgan": "~1.6.1",
     "node-fetch": "^1.7.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.0"
   }
 }
