@@ -33,7 +33,7 @@ a {
   bottom: 0;
   width: 100%;
   left: 0;
-  opacity: .3;
+  opacity: 0;
 }
 .preload{
   position: fixed;
@@ -48,4 +48,20 @@ a {
 	   -moz-transition: all 1.0s ease-in-out;
 	    -ms-transition: all 1.0s ease-in-out;
 	     	  transition: all 1.0s ease-in-out;
+}
+.play-button{
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  font-size: 125px;
+}
+.play-button:after{
+  content:'⏯';
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  -webkit-transform:translate(-50%,-50%);
 }

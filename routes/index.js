@@ -14,8 +14,8 @@ router.post('/album/:album',function( req , res , next ){
   });
 });
 
-router.get('/album/:album/:music',function( req , res , next ){
-	if(!/http|\/\//.test(req.params.music)){
+router.get(['/album/:album/:music','/album/:album'],function( req , res , next ){
+	if(req.params.music && !/http|\/\//.test(req.params.music)){
   		req.params.music = `/${req.params.music}`
   	}
   	res.render('index', { title:"2017-07-16",album:req.params.album,music:req.params.music });

@@ -6,6 +6,7 @@
 (function(){
     'use strict';
     const album = window.album || 'B0Z5qXGF1iS2iW';
+    const audio = $('audio')[0];
 
     fetch(`/album/${album}`,{method:'POST'}).then(req=>req.json()).then(data=>{
         const host = (function(locations){
@@ -22,8 +23,29 @@
                 .map(checksum=>data.webasseturls.items[checksum])
         };
     }).then(data=>{
-        carousel(data.photos.map( item=>`${data.host}${item.url_path}` ));
-        data.dateCreated
+        const photos = data.photos.map( item=>`${data.host}${item.url_path}` );
+
+        if( !audio )return carousel(photos);
+        if( !audio.play )return carousel(photos);
+
+        const $playButton = $('.play-button').removeClass('hide');
+        let canPlay = true;
+
+        $('img.in').prop('src',photos[0]);
+
+        $playButton.on('click',function(){
+            if(!canPlay)return;
+            clearInterval(timeId);
+            if(audio.paused){
+                audio.play().catch(()=>{canPlay=false;});
+                carousel(photos);
+                $playButton.removeClass('in');
+            }else{
+                audio.pause();
+                $playButton.addClass('in');
+            }
+        });
+
     });
 
     const showTitle = function(dateList){
@@ -33,21 +55,26 @@
         }, 5000);
     };
 
+    let timeId = 0;
+    let index = 0;
     const carousel = function( photos ){
         //photos = photos.filter((a,i)=>i<3);
-        let index = 0;
+        
         let speed = 3 * 1000;
         let $img = $('img.photo');
         let $pre = $('img.preload');
         $img.filter('.in').prop('src',photos[index]);
         index = (index+1) % photos.length;
         $img.filter(':not(.in)').prop('src',photos[index]);
-        setInterval(()=>{
+        timeId = setInterval(()=>{
             $img.filter(':not(.in)').prop('src',$pre.prop('src'));
             $img.toggleClass('in');
             index = (index+1) % photos.length;
             $pre.prop('src',photos[index]);
         },speed);
     };
+
+
+
 })();
 

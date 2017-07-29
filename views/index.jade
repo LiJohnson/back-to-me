@@ -1,11 +1,14 @@
 extends layout
 
 block content
-  div.container
-    img.photo.animate.fade.in
-    img.photo.animate.fade
-    img.preload
-    h2.title ...
-    - if (music) {
-    audio.player(src='#{music}',autoplay=true,controls=true,loop=true)
-    - }
+	div.container
+		img.photo.animate.fade.in
+		img.photo.animate.fade
+		img.preload
+		h2.title ...
+		- if (music) {
+		audio.player(src='#{music}',controls=true,loop=true)
+		- }
+	div.play-button.hide.fade.in
+		span.play-button-icon
+
